@@ -34,7 +34,7 @@ export class SearchFilterComponent implements OnInit {
   };
 
   constructor(private appService: AppService) {
-    this.currencies = ['usd', 'eur']; // fiat currency options
+    this.currencies = ['gbp', 'usd', 'eur']; // fiat currency options
     this.selectedCurrency = ''; // model to store selected fiat
     // array to hold names of cryptos to be used in filtering
     this.cryptoCurrOptions = [];
