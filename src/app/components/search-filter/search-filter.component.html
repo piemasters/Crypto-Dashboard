@@ -9,10 +9,9 @@
       </select>
     </div>
     <div class="form-group">
-      <ss-multiselect-dropdown id="cryptocurrencies"
-                               name="cryptocurrencies" [texts]="myTexts" [settings]="mySettings"
-                               [options]="cryptoCurrOptions" [(ngModel)]="optionsModel"
-                               (ngModelChange)="filterChange($event)"></ss-multiselect-dropdown>
+      <ss-multiselect-dropdown id="cryptocurrencies" name="cryptocurrencies" [texts]="myTexts" [settings]="mySettings"
+                               [options]="cryptoCurrOptions" [(ngModel)]="optionsModel" (ngModelChange)="filterChange($event)">
+      </ss-multiselect-dropdown>
     </div>
   </form>
 </div>
