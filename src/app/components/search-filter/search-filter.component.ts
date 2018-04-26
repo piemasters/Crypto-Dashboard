@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AppService} from '../../app.service';
-import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angular-2-dropdown-multiselect';
+import { AppService } from '../../app.service';
+import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 
 @Component({
   selector: 'app-search-filter',
@@ -10,13 +10,13 @@ import {IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts} from 'angul
 export class SearchFilterComponent implements OnInit {
 
   // fiat currency options
-  currencies: string[];
+  currencies: string[] = ['gbp', 'usd', 'eur'];
 
   // model to store selected fiat
-  selectedCurrency: string;
+  selectedCurrency: string = this.currencies[0];
 
   // array to hold names of cryptos to be used in filtering
-  cryptoCurrOptions: IMultiSelectOption[];
+  cryptoCurrOptions: IMultiSelectOption[] = [];
 
   // Default selection
   optionsModel: number[];
@@ -44,11 +44,6 @@ export class SearchFilterComponent implements OnInit {
   };
 
   constructor(private appService: AppService) {
-    this.currencies = ['gbp', 'usd', 'eur'];
-    this.selectedCurrency = 'gbp';
-    this.cryptoCurrOptions = [];
-
-    // coinsSubject is a RxJs subject in our service that will notify us when the api has gotten data about crypto coins
     this.appService.coinsSubject.subscribe({
       next: (v) => this.updateCryptoOptions(v),
     });
@@ -61,11 +56,11 @@ export class SearchFilterComponent implements OnInit {
   selectCurrency(newValue) {
     this.appService.loadMarketCaps(newValue);
   }
+
   filterChange(newValue) {
-    // BUG method should not be triggered by filter select
     this.appService.updateFilter(newValue);
   }
-// This method creates an array of valid options for the multiselect plugin from an array of crypto coins
+
   updateCryptoOptions(coins) {
     this.cryptoCurrOptions = [];
     coins.forEach((coin, index) => {
