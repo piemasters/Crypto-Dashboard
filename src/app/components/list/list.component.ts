@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AppService} from '../../app.service';
-import { Coin } from '../../coin';
+import { AppService } from '../../app.service';
+import { Coin } from '../../models/coin.model';
+import { Fiat } from '../../models/fiat.model';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +11,7 @@ import { Coin } from '../../coin';
 export class ListComponent implements OnInit {
   coins: Coin[];
   noDataMsg: string;
-  fiat: string;
+  fiat: Fiat[];
 
   constructor(private appService: AppService) {
     this.noDataMsg = 'Select fiat currency to get started';

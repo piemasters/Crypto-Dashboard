@@ -2,8 +2,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { HttpClient, HttpParams } from '@angular/common/http';
-// Import Coin Shape file
-import { Coin } from './coin';
+
+import { Coin } from './models/coin.model';
+import { Fiat } from './models/fiat.model';
+
 const API_BASE_URL = 'https://api.coinmarketcap.com/v1/';
 
 @Injectable()
@@ -12,11 +14,17 @@ export class AppService {
   private filteredCoins: Coin[]; // will hold data filtered from this.allCoins
   private filter: number[]; // will hold the array index of data contained in this.
 
+  currencies = [
+    { code: 'gbp', symbol: '£' },
+    { code: 'usd', symbol: '$' },
+    { code: 'eur', symbol: '€' }
+  ];
+
 // A couple of RxJs Subjects very important for communicating across Angular Components
   coinsSubject: Subject<Coin[]>;
   filteredCoinsSubject: Subject<Coin[]>;
   apiSubject: Subject<string>;
-  fiatSubject: Subject<string>;
+  fiatSubject: Subject<Fiat[]>;
   constructor(private http: HttpClient) {
     this.filter = [];
     // we initialize our subjects
@@ -26,7 +34,7 @@ export class AppService {
     this.fiatSubject = new Subject();
   }
   // this method loads market cap data from the API
-  loadMarketCaps(fiat: string) {
+  loadMarketCaps(fiat) {
     this.fiatSubject.next(fiat);
     const url = API_BASE_URL + 'ticker/';
     let params = new HttpParams();

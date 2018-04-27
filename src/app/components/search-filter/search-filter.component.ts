@@ -9,11 +9,10 @@ import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'ang
 })
 export class SearchFilterComponent implements OnInit {
 
-  // fiat currency options
-  currencies: string[] = ['gbp', 'usd', 'eur'];
+  currencies;
 
   // model to store selected fiat
-  selectedCurrency: string = this.currencies[0];
+  selectedCurrency: string;
 
   // array to hold names of cryptos to be used in filtering
   cryptoCurrOptions: IMultiSelectOption[] = [];
@@ -50,6 +49,8 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currencies = this.appService.currencies;
+    this.selectedCurrency = this.currencies[0].code;
     this.appService.loadMarketCaps(this.selectedCurrency);
   }
 
