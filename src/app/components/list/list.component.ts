@@ -14,14 +14,17 @@ export class ListComponent implements OnInit {
 
   constructor(private appService: AppService) {
     this.noDataMsg = 'Select fiat currency to get started';
+
     this.appService.filteredCoinsSubject.subscribe({
-      next: (v) => this.updateCoins(v),
+      next: (coins) => this.updateCoins(coins),
     });
+
     this.appService.apiSubject.subscribe({
       next: (msg) => this.noDataMsg = msg,
     });
+
     this.appService.fiatSubject.subscribe({
-      next: (newValue) => this.fiat = newValue,
+      next: (fiat) => this.fiat = fiat,
     });
   }
 

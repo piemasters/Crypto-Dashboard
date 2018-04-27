@@ -45,7 +45,7 @@ export class SearchFilterComponent implements OnInit {
 
   constructor(private appService: AppService) {
     this.appService.coinsSubject.subscribe({
-      next: (v) => this.updateCryptoOptions(v),
+      next: (coins) => this.updateCryptoOptions(coins),
     });
   }
 
