@@ -1,9 +1,9 @@
 <div>
   <form>
     <div class="form-group">
-      <select id="selectedCurrency" name="selectedCurrency" [(ngModel)]="selectedCurrency"
+      <select id="selectedCurrency" name="selectedCurrency"
               (change)="selectCurrency($event.target.value)" class="form-control">
-        <option value="">Select fiat currency</option>
+
         <option *ngFor="let currency of currencies" value="{{currency.code}}">{{currency.code.toUpperCase()}}</option>
       </select>
     </div>

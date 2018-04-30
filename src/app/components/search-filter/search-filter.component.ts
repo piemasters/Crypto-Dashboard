@@ -12,7 +12,9 @@ export class SearchFilterComponent implements OnInit {
   currencies;
 
   // model to store selected fiat
-  selectedCurrency: string;
+  selected = {
+    currency: {}
+  };
 
   // array to hold names of cryptos to be used in filtering
   cryptoCurrOptions: IMultiSelectOption[] = [];
@@ -49,13 +51,14 @@ export class SearchFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currencies = this.appService.currencies;
-    this.selectedCurrency = this.currencies[0].code;
-    this.appService.loadMarketCaps(this.selectedCurrency);
+    this.currencies = this.appService.getCurrencies();
+    this.selected.currency = this.currencies[0];
+    this.appService.loadMarketCaps(this.selected.currency);
   }
 
   selectCurrency(newValue) {
-    this.appService.loadMarketCaps(newValue);
+    this.selected.currency = newValue ? this.currencies.find(obj => obj.code === newValue) : '';
+    this.appService.loadMarketCaps(this.selected.currency);
   }
 
   filterChange(newValue) {

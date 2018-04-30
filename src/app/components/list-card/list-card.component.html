@@ -1,17 +1,17 @@
 <div class="card text-center mt-4">
   <div class="card-body">
     <h2 class="card-title">{{ coin.id | titlecase }}</h2>
-    <h4 class="mb-0 pb-1">{{ fiat_symbol }}{{ coin['price_'+fiat] }}</h4>
+    <h4 class="mb-0 pb-1">{{ fiat.symbol }}{{ coin['price_'+fiat.code] }}</h4>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
       24 hours: <span [class]="coin.percent_change_24h.charAt(0)==='-' ? 'red' : 'green' ">
-      {{ coin.percent_change_24h }}% <span *ngIf="fiat_symbol">({{ fiat_symbol }}{{  coin.price_change_24h }})</span>
+      {{ coin.percent_change_24h }}% <span *ngIf="fiat.symbol">({{ fiat.symbol }}{{  coin.price_change_24h }})</span>
     </span>
     </li>
     <li class="list-group-item">
       7 days: <span [class]="coin.percent_change_24h.charAt(0)==='-' ? 'red' : 'green' ">
-      {{ coin.percent_change_7d }}% <span *ngIf="fiat_symbol">({{ fiat_symbol }}{{  coin.price_change_7d }})</span>
+      {{ coin.percent_change_7d }}% <span *ngIf="fiat.symbol">({{ fiat.symbol }}{{  coin.price_change_7d }})</span>
     </span>
     </li>
   </ul>

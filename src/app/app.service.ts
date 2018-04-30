@@ -13,8 +13,7 @@ export class AppService {
   private allCoins: Coin[]; // will hold unmodified data returned by the api
   private filteredCoins: Coin[]; // will hold data filtered from this.allCoins
   private filter: number[]; // will hold the array index of data contained in this.
-
-  currencies = [
+  private currencies = [
     { code: 'gbp', symbol: '£' },
     { code: 'usd', symbol: '$' },
     { code: 'eur', symbol: '€' }
@@ -35,13 +34,14 @@ export class AppService {
   }
   // this method loads market cap data from the API
   loadMarketCaps(fiat) {
+    // console.log(fiat.code);
     this.fiatSubject.next(fiat);
     const url = API_BASE_URL + 'ticker/';
     let params = new HttpParams();
     params = params.append('limit', '25');
-    if (fiat !== 'usd') {
+    if (fiat.code !== 'usd') {
       // TODO: check if fiat is valid
-      params = params.append('convert', fiat);
+      params = params.append('convert', fiat.code);
     }
     this.apiSubject.next('loading...');
     this.http
@@ -79,5 +79,9 @@ export class AppService {
       this.filter.push(elem);
     });
     this.filterMarketCaps();
+  }
+
+  getCurrencies() {
+    return this.currencies;
   }
 }
