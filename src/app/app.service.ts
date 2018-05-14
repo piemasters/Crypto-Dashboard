@@ -1,6 +1,6 @@
 // Imports
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Coin } from './models/coin.model';
@@ -8,7 +8,9 @@ import { Fiat } from './models/fiat.model';
 
 const API_BASE_URL = 'https://api.coinmarketcap.com/v1/';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AppService {
   private allCoins: Coin[]; // will hold unmodified data returned by the api
   private filteredCoins: Coin[]; // will hold data filtered from this.allCoins
@@ -34,7 +36,6 @@ export class AppService {
   }
   // this method loads market cap data from the API
   loadMarketCaps(fiat) {
-    // console.log(fiat.code);
     this.fiatSubject.next(fiat);
     const url = API_BASE_URL + 'ticker/';
     let params = new HttpParams();
