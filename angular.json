@@ -16,6 +16,11 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -69,6 +74,11 @@
           "options": {
             "main": "src/test.ts",
             "karmaConfig": "./karma.conf.js",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
